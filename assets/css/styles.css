@@ -1,0 +1,18 @@
+#player1,
+#gamedisplay,
+#player2 {
+	background-color: gray;
+	height: 200px;
+	border: solid black;
+	position: relative
+}
+
+.form-control {
+	float: left
+}
+
+#player1score,
+#player2score {
+	position: absolute;
+	bottom: 0;
+}
