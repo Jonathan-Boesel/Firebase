@@ -82,6 +82,36 @@ function gameStart() {
 	// stateCheck()
 }
 
+function gameRestart() {
+	var targetChoices = ".player" + player + "choices"
+	console.log("*********")
+	turn = 1
+	db.ref().on("value", function(snapshot) {
+		var wins = snapshot.child("players/1/wins").val()
+		var losses = snapshot.child("players/1/losses").val()
+		$("#player1score").text("Wins: " + wins + " Losses: " + losses)
+		var wins = snapshot.child("players/2/wins").val()
+		var losses = snapshot.child("players/2/losses").val()
+		$("#player2score").text("Wins: " + wins + " Losses: " + losses)
+	});
+	$("#player2").css("border", "solid black")
+	$("#player1choice").hide()
+	$("#player2choice").hide()
+	$(targetChoices).show()
+	$(targetChoices).html('<p class="choice" data-choice="ROCK">ROCK</p>' + '<p class="choice" data-choice="PAPER">PAPER</p>' + '<p class="choice" data-choice="SCISSORS">SCISSORS</p>')
+	$(targetChoices).data("clickable", "on")
+	db.ref().update({
+		turn: turn
+	})
+}
+
+var Clock;
+
+function startClock() {
+	setTimeout(gameRestart, 3000)
+	clearInterval(Clock)
+}
+
 function battle() {
 	// stateCheck()
 	db.ref().once("value", function(snapshot) {
@@ -128,6 +158,7 @@ function battle() {
 			wins: wins,
 			losses: losses
 		})
+		startClock()
 	})
 }
 
