@@ -97,6 +97,7 @@ function gameRestart() {
 	$("#player2").css("border", "solid black")
 	$("#player1choice").hide()
 	$("#player2choice").hide()
+	$("#winner").text("")
 	$(targetChoices).show()
 	$(targetChoices).html('<p class="choice" data-choice="ROCK">ROCK</p>' + '<p class="choice" data-choice="PAPER">PAPER</p>' + '<p class="choice" data-choice="SCISSORS">SCISSORS</p>')
 	$(targetChoices).data("clickable", "on")
